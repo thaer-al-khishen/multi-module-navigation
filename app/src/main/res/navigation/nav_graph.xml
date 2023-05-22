@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/testFragment1">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.thaer.home.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/testFragment1"
+        android:name="com.example.multi_modulenavigation.test.TestFragment1"
+        android:label="fragment_test1"
+        tools:layout="@layout/fragment_test1" >
+        <argument
+            android:name="message"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_testFragment1_to_testFragment2"
+            app:destination="@id/testFragment2" />
+        <action
+            android:id="@+id/action_testFragment1_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testFragment2"
+        android:name="com.example.multi_modulenavigation.test.TestFragment2"
+        android:label="fragment_test2"
+        tools:layout="@layout/fragment_test2" >
+        <action
+            android:id="@+id/action_testFragment2_to_testFragment3"
+            app:destination="@id/testFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/testFragment3"
+        android:name="com.example.multi_modulenavigation.test.TestFragment3"
+        android:label="fragment_test3"
+        tools:layout="@layout/fragment_test3" />
+
+</navigation>
