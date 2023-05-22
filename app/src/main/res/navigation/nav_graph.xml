@@ -18,6 +18,10 @@
         <argument
             android:name="message"
             app:argType="string"/>
+        <argument
+            android:name="showMessage"
+            app:argType="boolean"
+            android:defaultValue="false"/>
         <action
             android:id="@+id/action_testFragment1_to_testFragment2"
             app:destination="@id/testFragment2" />

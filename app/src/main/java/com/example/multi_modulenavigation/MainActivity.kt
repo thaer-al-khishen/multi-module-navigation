@@ -3,6 +3,7 @@ package com.example.multi_modulenavigation
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
@@ -45,11 +46,29 @@ class MainActivity : CoreActivity() {
         lifecycleScope.launchWhenCreated {
             mainViewModel.showLoader.collectLatest {
                 if (it) {
-                    Log.d("ThaerOutput","Changed")
+                    Log.d("ThaerOutput", "Changed")
                 }
             }
         }
 
+//        lifecycleScope.launchWhenCreated {
+//            mainViewModel.sharedData.observe(this@MainActivity) {
+//                if (it is MainViewModel.SharedData.NavigationSharedMessage()) {
+//                    Toast.makeText(this@MainActivity, it.message, Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
+
+        lifecycleScope.launchWhenCreated {
+            mainViewModel.sharedData.observe(this@MainActivity) { event ->
+                event.getContentIfNotHandled()?.let { data ->
+                    // Handle the shared data here
+                    if (data is MainViewModel.SharedData.NavigationSharedMessage) {
+                        Toast.makeText(this@MainActivity, data.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
     }
 
 }

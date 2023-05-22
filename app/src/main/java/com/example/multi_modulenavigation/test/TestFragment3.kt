@@ -16,7 +16,7 @@ class TestFragment3 : BaseBindingViewModelFragment<FragmentTest3Binding, TestFra
 
 //        binding.btnToFragment1.setOnClickListener {
 //            TestNavigationHandler.getInterface()?.onNavigateToTest1Clicked()
-////            TestNavigationHandler.getInterface()?.onNavigateToTest1FromTest3Clicked()
+//            TestNavigationHandler.getInterface()?.onNavigateToTest1FromTest3Clicked()
 //        }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

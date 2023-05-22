@@ -14,9 +14,9 @@ class TestFragment2 : BaseBindingViewModelFragment<FragmentTest2Binding, TestFra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.btnToFragment3.setOnClickListener {
-//            TestNavigationHandler.getInterface()?.onNavigateToTest3Clicked()
-//        }
+        binding.btnToFragment3.setOnClickListener {
+            TestNavigationHandler.getInterface()?.onNavigateToTest3Clicked()
+        }
 
         binding.btnToHomeFragment.setOnClickListener {
             TestNavigationHandler.getInterface()?.onNavigateToHomeClicked()

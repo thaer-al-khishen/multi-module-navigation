@@ -3,7 +3,9 @@ package com.thaer.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import arrow.core.Either
 import arrow.core.Tuple20
 import arrow.core.computations.either
@@ -11,6 +13,7 @@ import arrow.core.flatMap
 import com.thaer.core.MainApplication
 import com.thaer.core.binding_utils.BaseBindingFragment
 import com.thaer.core.factory.ViewModelFactory
+import com.thaer.core.viewmodel.MainViewModel
 import com.thaer.home.databinding.FragmentHomeBinding
 import com.thaer.home.di.DaggerHomeComponent
 import com.thaer.home.di.HomeComponent
@@ -22,6 +25,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
 //    private val homeHiltViewModel: HomeHiltViewModel by viewModels()
     private var component: HomeComponent? = null
     private val viewModel: HomeViewModel by viewModels { factory }
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getHomeComponent()?.inject(this)
@@ -32,6 +36,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnClick.setOnClickListener {
+            mainViewModel.configureSharedData(MainViewModel.SharedData.NavigationSharedMessage("Clicked on the button from home screen"))
             HomeNavigationHandler.getInterface()?.onButtonClicked()
 //            mainViewModel.showBottomNav()
         }
@@ -59,6 +64,12 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
             }.map {
                 Log.d("ThaerOutput", "All operations done, $it")
             }
+        }
+
+        childFragmentManager.setFragmentResultListener("requestKey", viewLifecycleOwner) { key, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getString("bundleKey")
+            // Do something with the result
         }
 
     }

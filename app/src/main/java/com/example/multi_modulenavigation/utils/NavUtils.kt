@@ -48,6 +48,7 @@ fun NavController.navigateWithMessageAndClearBackStack(fragmentId: Int, message:
 
     val bundle = Bundle().apply {
         putString("message", message)
+        putBoolean("showMessage", true)
     }
 
     this.navigate(fragmentId, bundle, navOptions)
