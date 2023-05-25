@@ -1,5 +1,6 @@
 package com.example.multi_modulenavigation
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.multi_modulenavigation.test.TestNavigationImplementation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.thaer.core.CoreActivity
+import com.thaer.core.error_handling.GenericErrorHandlingController
 import com.thaer.core.viewmodel.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 
@@ -69,6 +71,21 @@ class MainActivity : CoreActivity() {
                 }
             }
         }
+
+        GenericErrorHandlingController.setInterface(object : GenericErrorHandlingController.IErrorHandling {
+            override fun onGenericError(title: String, message: String) {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setTitle(title)
+                builder.setMessage(message)
+
+                builder.setPositiveButton(android.R.string.ok) { dialog, which ->
+                    dialog.dismiss()
+                }
+
+                builder.show()
+            }
+        })
+
     }
 
 }

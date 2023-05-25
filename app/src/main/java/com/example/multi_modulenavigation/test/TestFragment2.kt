@@ -19,7 +19,7 @@ class TestFragment2 : BaseBindingViewModelFragment<FragmentTest2Binding, TestFra
         }
 
         binding.btnToHomeFragment.setOnClickListener {
-            TestNavigationHandler.getInterface()?.onNavigateToHomeClicked()
+//            TestNavigationHandler.getInterface()?.onNavigateToHomeClicked()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

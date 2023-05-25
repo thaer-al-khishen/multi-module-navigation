@@ -4,8 +4,13 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.example.multi_modulenavigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.JsonObject
+import com.thaer.core.fragment_input_data_utils.extract
+import com.thaer.core.fragment_input_data_utils.extractSerializable
+import com.thaer.core.fragment_input_data_utils.extractString
 import com.thaer.home.HomeFragmentInput
 import com.thaer.home.HomeInputSource
+import org.json.JSONObject
 
 class TestNavigationImplementation(
     private val navController: NavController,
@@ -35,8 +40,13 @@ class TestNavigationImplementation(
                 }
             }
 
-            override fun onNavigateToHomeClicked() {
-                val homeFragmentInput = HomeFragmentInput("Thaer", "Generic function", "", HomeInputSource.FROM_TEST_1)
+            override fun onNavigateToHomeClicked(jsonObject: JsonObject) {
+                val homeFragmentInput = HomeFragmentInput(
+                    jsonObject.extractString("name"),
+                    "Generic function",
+                    "",
+                    HomeInputSource.FROM_TEST_1
+                )
                 navController.navigateOnceWithDataInputClass(R.id.homeFragment, homeFragmentInput)
 //                val bundle = bundleOf(HomeFragmentInput().getNavKey() to homeFragmentInput)
 //                navController.navigateOnce(R.id.homeFragment, bundle)

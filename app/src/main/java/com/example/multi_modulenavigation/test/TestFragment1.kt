@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import com.example.multi_modulenavigation.databinding.FragmentTest1Binding
 import com.thaer.core.binding_utils.BaseBindingViewModelFragment
+import com.thaer.core.fragment_input_data_utils.constructJsonObject
 
 class TestFragment1 : BaseBindingViewModelFragment<FragmentTest1Binding, TestFragment1VM>() {
 
@@ -26,7 +27,11 @@ class TestFragment1 : BaseBindingViewModelFragment<FragmentTest1Binding, TestFra
 //        }
 
         binding.btnToHomeFragment.setOnClickListener {
-            TestNavigationHandler.getInterface()?.onNavigateToHomeClicked()
+            TestNavigationHandler.getInterface()?.onNavigateToHomeClicked(
+                constructJsonObject(
+                    Pair("name", "Thaer")
+                )
+            )
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
