@@ -5,7 +5,7 @@ import com.thaer.core.domain.repository.IHomeRepository
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, DatabaseModule::class])
 abstract class RepositoryModule {
     @Binds
     abstract fun provideMovieRepository(repository: HomeRepository): IHomeRepository

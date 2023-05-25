@@ -1,4 +1,4 @@
-package com.thaer.core.data.models
+package com.thaer.core.data.models.remote
 
 import com.google.gson.annotations.SerializedName
 

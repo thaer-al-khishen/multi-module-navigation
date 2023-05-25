@@ -2,6 +2,7 @@ package com.thaer.core
 
 import android.app.Application
 import android.content.Context
+import com.thaer.core.data.room.AppDatabase
 import com.thaer.core.di.AppComponent
 import com.thaer.core.di.CoreComponent
 import com.thaer.core.di.DaggerAppComponent
@@ -18,6 +19,11 @@ open class MainApplication: Application() {
         fun applicationContext() : Context {
             return instance!!.applicationContext
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        AppDatabase.getDatabase(this)
     }
 
     val coreComponent: CoreComponent by lazy {

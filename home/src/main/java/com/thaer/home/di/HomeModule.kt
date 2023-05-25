@@ -2,6 +2,8 @@ package com.thaer.home.di
 
 import com.thaer.core.domain.usecase.GetMarvelHeroesUseCaseImpl
 import com.thaer.core.domain.usecase.GetMarvelHeroesUseCase
+import com.thaer.core.domain.usecase.GetUsersUseCase
+import com.thaer.core.domain.usecase.GetUsersUseCaseImpl
 import com.thaer.core.domain.usecase.either.GetMarvelHeroesEitherUseCase
 import com.thaer.core.domain.usecase.either.GetMarvelHeroesEitherUseCaseImpl
 import dagger.Binds
@@ -17,4 +19,9 @@ abstract class HomeModule {
     @Binds
     @Named("HomeModule")
     abstract fun provideMovieEitherUseCase(getMarvelHeroesEitherUseCase: GetMarvelHeroesEitherUseCaseImpl): GetMarvelHeroesEitherUseCase
+
+    @Binds
+    @Named("HomeModule")
+    abstract fun provideUsersUseCase(getUsersUseCase: GetUsersUseCaseImpl): GetUsersUseCase
+
 }

@@ -1,6 +1,6 @@
 package com.thaer.core.domain.usecase.either
 
-import com.thaer.core.data.models.Hero
+import com.thaer.core.data.models.remote.Hero
 import com.thaer.core.data.repositories.GenericReturnType
 import com.thaer.core.domain.repository.IHomeRepository
 import javax.inject.Inject

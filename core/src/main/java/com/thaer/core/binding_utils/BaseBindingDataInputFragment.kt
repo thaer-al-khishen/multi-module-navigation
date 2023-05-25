@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.thaer.core.data.room.UserDao
+import com.thaer.core.domain.prefs.Prefs
 import com.thaer.core.factory.ViewModelFactory
 import com.thaer.core.fragment_input_data_utils.DataInputClass
 import com.thaer.core.fragment_input_data_utils.DataInputClassBinding
@@ -19,6 +21,9 @@ open class BaseBindingDataInputFragment<VB : ViewBinding, DIC: DataInputClass>: 
 
     @Inject
     lateinit var factory: ViewModelFactory
+
+    @Inject
+    lateinit var prefs: Prefs
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         createViewWithBinding(inflater, container)

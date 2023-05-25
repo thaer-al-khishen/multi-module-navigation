@@ -8,11 +8,15 @@ import androidx.fragment.app.viewModels
 import arrow.core.computations.either
 import com.thaer.core.MainApplication
 import com.thaer.core.binding_utils.BaseBindingDataInputFragment
+import com.thaer.core.data.models.local.User
+import com.thaer.core.utils.launchFastScope
 import com.thaer.core.viewmodel.MainViewModel
 import com.thaer.home.databinding.FragmentHomeBinding
 import com.thaer.home.di.DaggerHomeComponent
 import com.thaer.home.di.HomeComponent
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseBindingDataInputFragment<FragmentHomeBinding, HomeFragmentInput>() {
 
@@ -48,6 +52,11 @@ class HomeFragment : BaseBindingDataInputFragment<FragmentHomeBinding, HomeFragm
             dataInputs.toString()
         )
 
+        Log.d(
+            "ThaerOutput",
+            prefs.isDarkThemeMode.toString()
+        )
+
         binding.btnClick.setOnClickListener {
             mainViewModel.configureSharedData(MainViewModel.SharedData.NavigationSharedMessage("Clicked on the button from home screen"))
             HomeNavigationHandler.getInterface()?.onButtonClicked()
@@ -66,6 +75,10 @@ class HomeFragment : BaseBindingDataInputFragment<FragmentHomeBinding, HomeFragm
             viewModel.getMarvelHeroesAsEither()
             viewModel.heroesListLiveData.observe(viewLifecycleOwner) {
                 Log.d("ThaerOutput", "From hilt: $it")
+            }
+            viewModel.getUsers()
+            viewModel.usersListLiveData.observe(viewLifecycleOwner) {
+                Log.d("ThaerOutput: Users", "$it")
             }
         }
 

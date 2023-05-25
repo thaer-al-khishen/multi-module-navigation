@@ -1,7 +1,6 @@
 package com.thaer.core.network
 
-import arrow.core.Either
-import com.thaer.core.data.models.Hero
+import com.thaer.core.data.models.remote.Hero
 import retrofit2.http.GET
 
 interface ApiService {

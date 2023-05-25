@@ -1,30 +1,36 @@
 package com.thaer.core.data.repositories
 
-import android.accounts.NetworkErrorException
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.util.Log
 import arrow.core.Either
-import arrow.core.right
-import arrow.core.rightIfNotNull
-import com.thaer.core.data.models.Hero
+import com.thaer.core.data.models.local.User
+import com.thaer.core.data.models.remote.Hero
+import com.thaer.core.data.room.UserDao
 import com.thaer.core.domain.repository.IHomeRepository
 import com.thaer.core.network.ApiService
+import com.thaer.core.utils.launchFastScope
+import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeRepository @Inject constructor(private val apiService: ApiService): IHomeRepository {
+class HomeRepository @Inject constructor(
+    private val apiService: ApiService,
+    private val userDao: UserDao
+) : IHomeRepository {
 
     override suspend fun getAllMarvelHeroes(): List<Hero> {
         return apiService.getAllMarvelHeroes()
     }
 
-    override suspend fun getAllMarvelHeroesAsEither(): GenericReturnType<List<Hero>> = wrapWithEither {
-        apiService.getAllMarvelHeroes()
-    }
+    override suspend fun getAllUsers(): List<User> = userDao.getAllUsers()
 
+    override suspend fun getAllMarvelHeroesAsEither(): GenericReturnType<List<Hero>> {
+        return wrapWithEither {
+            apiService.getAllMarvelHeroes()
+        }
+    }
 }
 
 typealias GenericReturnType<T> = Either<AppError, T>
