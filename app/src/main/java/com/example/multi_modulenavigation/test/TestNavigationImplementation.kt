@@ -1,11 +1,11 @@
 package com.example.multi_modulenavigation.test
 
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
-import com.example.multi_modulenavigation.R
-import com.example.multi_modulenavigation.navigateOnce
-import com.example.multi_modulenavigation.navigateWithMessageAndClearBackStack
-import com.example.multi_modulenavigation.safeNavigateWith
+import com.example.multi_modulenavigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.thaer.home.HomeFragmentInput
+import com.thaer.home.HomeInputSource
 
 class TestNavigationImplementation(
     private val navController: NavController,
@@ -36,7 +36,10 @@ class TestNavigationImplementation(
             }
 
             override fun onNavigateToHomeClicked() {
-                navController.navigateOnce(R.id.homeFragment)
+                val homeFragmentInput = HomeFragmentInput("Thaer", "Generic function", "", HomeInputSource.FROM_TEST_1)
+                navController.navigateOnceWithDataInputClass(R.id.homeFragment, homeFragmentInput)
+//                val bundle = bundleOf(HomeFragmentInput().getNavKey() to homeFragmentInput)
+//                navController.navigateOnce(R.id.homeFragment, bundle)
 //                isNavigationProgrammatic = true
 //                bottomNavigationView.selectedItemId = R.id.testFragment1
 //                navController.navigateWithMessageAndClearBackStack(R.id.testFragment1, "Popped back to fragment 1!")

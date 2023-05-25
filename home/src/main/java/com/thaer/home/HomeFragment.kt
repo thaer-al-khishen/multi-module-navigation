@@ -5,22 +5,16 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import arrow.core.Either
-import arrow.core.Tuple20
 import arrow.core.computations.either
-import arrow.core.flatMap
 import com.thaer.core.MainApplication
-import com.thaer.core.binding_utils.BaseBindingFragment
-import com.thaer.core.factory.ViewModelFactory
+import com.thaer.core.binding_utils.BaseBindingDataInputFragment
 import com.thaer.core.viewmodel.MainViewModel
 import com.thaer.home.databinding.FragmentHomeBinding
 import com.thaer.home.di.DaggerHomeComponent
 import com.thaer.home.di.HomeComponent
 import kotlinx.coroutines.delay
-import javax.inject.Inject
 
-class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseBindingDataInputFragment<FragmentHomeBinding, HomeFragmentInput>() {
 
 //    private val homeHiltViewModel: HomeHiltViewModel by viewModels()
     private var component: HomeComponent? = null
@@ -34,6 +28,25 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        arguments?.let {
+//            it.let {
+//              Log.d(
+//                  "ThaerOutput",
+//                  (it.getSerializable(HomeFragmentInput().getNavKey()) as HomeFragmentInput).toString()
+//              )
+//            }
+//        }
+
+//        Log.d(
+//            "ThaerOutput",
+//            getInputData<HomeFragmentInput>().toString()
+//        )
+
+        Log.d(
+            "ThaerOutput",
+            dataInputs.toString()
+        )
 
         binding.btnClick.setOnClickListener {
             mainViewModel.configureSharedData(MainViewModel.SharedData.NavigationSharedMessage("Clicked on the button from home screen"))
