@@ -8,6 +8,7 @@ import arrow.core.Either
 import arrow.core.Tuple20
 import arrow.core.computations.either
 import arrow.core.flatMap
+import arrow.fx.coroutines.parZip
 import com.thaer.core.MainApplication
 import com.thaer.core.binding_utils.BaseBindingFragment
 import com.thaer.core.factory.ViewModelFactory
@@ -51,13 +52,19 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
             }
         }
 
+//        launchWhenStarted {
+//            either<Throwable, Triple<String, String, String>> {
+//                Triple(first(), second(), third())
+//            }.mapLeft {
+//                Log.d("ThaerOutput", "$it")
+//            }.map {
+//                Log.d("ThaerOutput", "All operations done, $it")
+//            }
+//        }
+
         launchWhenStarted {
-            either<Throwable, Triple<String, String, String>> {
-                Triple(first(), second(), third())
-            }.mapLeft {
-                Log.d("ThaerOutput", "$it")
-            }.map {
-                Log.d("ThaerOutput", "All operations done, $it")
+            parZip({ first() }, { second() }) { first, second ->
+                Log.d("ThaerOutput", "First $first and second $second")
             }
         }
 
